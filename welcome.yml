@@ -4,7 +4,15 @@ on:
     types: [opened]
 permissions:
   pull-requests: write
+
 jobs:
-  build:
-    name: Post welcome comment
+  post_welcome:
     runs-on: ubuntu-latest
+    steps:
+    - name: Post welcome comment
+      uses: actions-ecosystem/action-add-comment@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        issue-number: ${{ github.event.pull_request.number }}
+        comment: |
+          Welcome to the project! Thank you for your contribution.
